@@ -142,8 +142,8 @@ const Video = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const videoRes = await axios.post(`${process.env.REACT_APP_BASE_URL}videos/find/${path}`);
-                const channelRes = await axios.get(`${process.env.REACT_APP_BASE_URL}users/find/${videoRes.data.userId}`);
+                const videoRes = await axios.post(`${process.env.REACT_APP_BASE_URL}/videos/find/${path}`);
+                const channelRes = await axios.get(`${process.env.REACT_APP_BASE_URL}/users/find/${videoRes.data.userId}`);
 
                 setChannel(channelRes.data);
                 dispatch(fetchSuccess(videoRes.data));
@@ -156,7 +156,7 @@ const Video = () => {
 
     //For liking
     const handleLike = async () => {
-        await axios.put(`${process.env.REACT_APP_BASE_URL}users/like/${currentVideo._id}`, {
+        await axios.put(`${process.env.REACT_APP_BASE_URL}/users/like/${currentVideo._id}`, {
             userId: currentUser._id
         });
         dispatch(like(currentUser._id));
@@ -164,7 +164,7 @@ const Video = () => {
 
     //For disliking
     const handleDislike = async () => {
-        await axios.put(`${process.env.REACT_APP_BASE_URL}users/dislike/${currentVideo._id}`, {
+        await axios.put(`${process.env.REACT_APP_BASE_URL}/users/dislike/${currentVideo._id}`, {
             userId: currentUser._id
         });
         dispatch(dislike(currentUser._id));
@@ -173,11 +173,11 @@ const Video = () => {
     //For subscribing
     const handleSubscribe = async () => {
         currentUser.subscribedUsers.includes(channel._id) ? (
-            await axios.put(`${process.env.REACT_APP_BASE_URL}users/unsub/${channel._id}`, {
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/users/unsub/${channel._id}`, {
                 userId: currentUser._id
             })
         ) : (
-            await axios.put(`${process.env.REACT_APP_BASE_URL}users/sub/${channel._id}`, {
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/users/sub/${channel._id}`, {
                 userId: currentUser._id
             })
         )
@@ -187,7 +187,7 @@ const Video = () => {
     //Save video
     const handleSaveVideo = async () => {
         try {
-            await axios.put(`${process.env.REACT_APP_BASE_URL}users/save/${currentVideo._id}`, {
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/users/save/${currentVideo._id}`, {
                 userId: currentUser._id
             });
             dispatch(saveVideo(currentVideo._id));
@@ -199,7 +199,7 @@ const Video = () => {
     //Remove saved video
     const handleRemoveSavedVideo = async () => {
         try {
-            await axios.put(`${process.env.REACT_APP_BASE_URL}users/deletesave/${currentVideo._id}`, {
+            await axios.put(`${process.env.REACT_APP_BASE_URL}/users/deletesave/${currentVideo._id}`, {
                 userId: currentUser._id
             });
             dispatch(removeSavedVideo(currentVideo._id));

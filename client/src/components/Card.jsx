@@ -72,14 +72,14 @@ const Card = ({ type, video }) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}users/find/${video.userId}`);
+            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/users/find/${video.userId}`);
             setUser(res.data);
         };
         getUser();
     }, [video.userId]);
 
     const increaseViews = async (id) => {
-        await axios.put(`${process.env.REACT_APP_BASE_URL}videos/view/${id}`);
+        await axios.put(`${process.env.REACT_APP_BASE_URL}/videos/view/${id}`);
     };
 
     return (

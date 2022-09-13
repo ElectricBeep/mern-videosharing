@@ -86,7 +86,7 @@ const SignIn = () => {
         e.preventDefault();
         dispatch(loginStart());
         try {
-            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}auth/signin`, {
+            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/signin`, {
                 name,
                 password
             });
@@ -101,7 +101,7 @@ const SignIn = () => {
         dispatch(loginStart());
         signInWithPopup(auth, provider)
             .then((result) => {
-                axios.post(`${process.env.REACT_APP_BASE_URL}auth/google`, {
+                axios.post(`${process.env.REACT_APP_BASE_URL}/auth/google`, {
                     name: result.user.displayName,
                     email: result.user.email,
                     img: result.user.photoURL,
@@ -118,7 +118,7 @@ const SignIn = () => {
         e.preventDefault();
         dispatch(signupStart());
         try {
-            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}auth/signup`, {
+            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/auth/signup`, {
                 name,
                 email,
                 password

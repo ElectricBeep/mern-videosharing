@@ -13,7 +13,7 @@ const Recommendation = ({ tags, currentVideoId }) => {
 
     useEffect(() => {
         const getRecommendedVideos = async () => {
-            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}videos/tags?tags=${tags}`);
+            const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/videos/tags?tags=${tags}`);
             setVideos(res.data);
         };
         getRecommendedVideos();

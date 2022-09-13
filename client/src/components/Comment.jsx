@@ -64,7 +64,7 @@ const Comment = ({ comment, comments }) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}users/find/${comment.userId}`);
+                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/users/find/${comment.userId}`);
                 setChannel(res.data);
             } catch (err) {
                 console.log(err);
@@ -74,7 +74,7 @@ const Comment = ({ comment, comments }) => {
     }, [comment.userId]);
 
     const handleDeleteComment = async () => {
-        await axios.post(`${process.env.REACT_APP_BASE_URL}comments/${comment._id}`, {
+        await axios.post(`${process.env.REACT_APP_BASE_URL}/comments/${comment._id}`, {
             userId: currentUser._id
         });
         window.location.reload();

@@ -80,6 +80,10 @@ const Button = styled.button`
     &:hover {
         background-color: #585858;
     }
+    &:disabled {
+        color: #585858;
+        pointer-events: none;
+    }
 `;
 
 const Label = styled.label`
@@ -93,6 +97,7 @@ const Upload = ({ setOpen }) => {
     const [videoPercentage, setVideoPercentage] = useState(0);
     const [inputs, setInputs] = useState({});
     const [tags, setTags] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const { currentUser } = useSelector(state => state.user);
 
@@ -109,6 +114,7 @@ const Upload = ({ setOpen }) => {
     };
 
     const uploadFile = (file, urlType) => {
+        setLoading(true);
         const storage = getStorage(app);
         const fileName = new Date().getTime() + file.name;
         const storageRef = ref(storage, fileName);
@@ -141,6 +147,7 @@ const Upload = ({ setOpen }) => {
                         return { ...prev, [urlType]: downloadURL };
                     });
                 });
+                setLoading(false);
             }
         );
     };
@@ -155,9 +162,11 @@ const Upload = ({ setOpen }) => {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}videos`, {
+        setLoading(true);
+        const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/videos`, {
             ...inputs, tags, userId: currentUser._id
         });
+        setLoading(false);
         setOpen(false);
         res.status === 200 && navigate(`/video/${res.data._id}`);
     };
@@ -206,7 +215,12 @@ const Upload = ({ setOpen }) => {
                         onChange={(e) => setImg(e.target.files[0])}
                     />
                 )}
-                <Button onClick={handleUpload}>Upload</Button>
+                <Button
+                    onClick={handleUpload}
+                    disabled={loading || !img || !video || inputs === {}}
+                >
+                    {loading ? "Uploading..." : "Upload"}
+                </Button>
             </Wrapper>
         </Container>
     )

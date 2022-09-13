@@ -28,7 +28,7 @@ const Search = () => {
         if (query.includes("?q=")) {
             setLoading(true);
             const fetchSearchedVideos = async () => {
-                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}videos/search${query}`);
+                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/videos/search${query}`);
                 setVideos(res.data);
                 setLoading(false);
             };
@@ -36,7 +36,7 @@ const Search = () => {
         } else {
             setLoading(true);
             const fetchVideosByTags = async () => {
-                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}videos/tags${query}`);
+                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/videos/tags${query}`);
                 setVideos(res.data);
                 setLoading(false);
             };

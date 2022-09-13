@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from "axios";
-import { MoonLoader } from "react-spinners";
 
 import Card from '../components/Card';
 import { useSelector } from 'react-redux';

@@ -56,7 +56,7 @@ const Comments = ({ videoId }) => {
     useEffect(() => {
         const getComments = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}comments/${videoId}`);
+                const res = await axios.get(`${process.env.REACT_APP_BASE_URL}/comments/${videoId}`);
                 setComments(res.data);
             } catch (err) {
                 console.log(err);
@@ -67,7 +67,7 @@ const Comments = ({ videoId }) => {
 
     const postComment = async () => {
         try {
-            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}comments`, {
+            const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/comments`, {
                 videoId,
                 desc: commentText,
                 userId: currentUser._id
